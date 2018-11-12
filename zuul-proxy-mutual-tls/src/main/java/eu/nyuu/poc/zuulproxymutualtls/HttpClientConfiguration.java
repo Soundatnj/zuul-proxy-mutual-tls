@@ -20,9 +20,12 @@ import java.io.File;
 @Configuration
 public class HttpClientConfiguration {
 
+    @Value("${system.keystorePath}")
+    private String keystorePath;
+
     @Bean
     public CloseableHttpClient httpClient() throws Exception {
-        Resource resource = new FileSystemResource("/home/nk/develop/pocs/mutual-tls-with-spring-boot/keystores/client.jks");
+        Resource resource = new FileSystemResource(keystorePath);
 
         File trustStoreFile = resource.getFile();
 
