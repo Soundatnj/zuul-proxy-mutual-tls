@@ -16,7 +16,10 @@ sudo python2 ./webserver.py --ssl --port 443 --key CAs/server/server.xip.io.key 
 ```bash
 cd CAs
 
-curl -k --cert client/client.xip.io.crt --key client/client.xip.io.key https://127.0.0.1.xip.io
+# --cacert: path of the CA authority, as it's a unknown CA we give it to curl to recognize it
+# --cert: the path of the client cert
+# --key: path of the client key
+curl --cacert server/ca.pem --cert client/client.xip.io.crt --key client/client.xip.io.key https://127.0.0.1.xip.io
 ```
 
 It should return a listing of the files inside the repo.
