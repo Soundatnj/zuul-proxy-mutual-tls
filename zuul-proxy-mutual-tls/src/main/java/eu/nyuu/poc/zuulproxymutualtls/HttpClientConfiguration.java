@@ -36,19 +36,19 @@ public class HttpClientConfiguration {
                         "password".toCharArray())
                 .build();
 
-        HostnameVerifier iDontCare = new HostnameVerifier() {
-            public boolean verify(String s, SSLSession sslSession) {
-                return true;
-            }
-        };
+        // Allow all FQDN verifier, for tests
+//        HostnameVerifier iDontCare = new HostnameVerifier() {
+//            public boolean verify(String s, SSLSession sslSession) {
+//                return true;
+//            }
+//        };
 
         // Allow TLSv12 protocol only
         SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(
                 sslcontext,
                 new String[]{"TLSv1.2"},
                 null,
-//                SSLConnectionSocketFactory.getDefaultHostnameVerifier());
-                iDontCare);
+                SSLConnectionSocketFactory.getDefaultHostnameVerifier());
 
         return HttpClients.custom()
                 .setSSLSocketFactory(sslsf)
